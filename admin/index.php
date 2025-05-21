@@ -1,3 +1,29 @@
+<?php
+session_start();
+include 'config/koneksi.php';
+
+
+
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $password = sha1($_POST['password']);
+
+    // select / tampilkan semua data dari table user dimana email dan password di ambil dari orang
+    // input di inputan email
+    $query  = mysqli_query($config, "SELECT * FROM users 
+    WHERE email='$email' AND  password ='$password'");
+    // apakah / jika betul email dan password yang di input user adalah email yg ada di table user
+    if (mysqli_num_rows($query)  > 0) {
+        $row = mysqli_fetch_assoc($query);
+        $_SESSION['NAME'] = $row['name'];
+        $_SESSION['ID_USER'] = $row['id'];
+        header("location:dashboard.php");
+    } else {
+        header("location:index.php?error=login");
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +56,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label">Password</label>
                                         <input type="password" class="form-control"
-                                            name="email" placeholder="Masukkan Password Anda">
+                                            name="password" placeholder="Masukkan Password Anda">
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary">Login</button>
