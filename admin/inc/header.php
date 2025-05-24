@@ -1,14 +1,3 @@
-<?php
-session_start();
-
-$_name = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '';
-// if(isset($_SESSION['NAME'])){ $_name = $_SESSION['name']};
-if (!$_name) {
-    header("location:index.php?access=failed");
-}
-
-
-?>
 <header class="shadow">
     <nav class="navbar navbar-expand-lg bg-body-white">
         <div class="container-fluid">
@@ -27,7 +16,7 @@ if (!$_name) {
                             Page
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="?page=team">Team</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -36,14 +25,35 @@ if (!$_name) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="user.php">User</a>
+                        <a class="nav-link" href="?page=user">User</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-skill">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-gallery">Galleries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=manage-about">About Us</a>
+                    </li>
+
                 </ul>
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <!-- <?= $_name ?> -->
+                            <?php //echo $_name 
+                            ?>
                             <?php echo $_name ?>
+
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="php/keluar.php">Keluar</a></li>

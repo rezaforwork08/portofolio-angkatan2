@@ -26,6 +26,9 @@ if (isset($_POST['edit'])) {
     $email = $_POST['email'];
     $password = sha1($_POST['password']);
 
+    if ($password == '') {
+        $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email' WHERE id='$id_user'");
+    }
     $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email', 
     password='$password' WHERE id='$id_user'");
     if ($queryUpdate) {
@@ -73,9 +76,17 @@ if (isset($_POST['edit'])) {
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="user.php">User</a>
-                            </li>
+                            <?php
+                            $decrypt = base64_decode($_GET['level']);
+                            if (isset($_GET['level']) && $decrypt == 1) {
+                            ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="user.php">User</a>
+                                </li>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
 
                     </div>
@@ -100,7 +111,7 @@ if (isset($_POST['edit'])) {
                                             <input required name="name" type="text"
                                                 class="form-control"
                                                 placeholder="Masukkan nama anda"
-                                                value="<?= $rowEdit['name'] ?>">
+                                                value="<?= isset($_GET['edit']) ? $rowEdit['name'] : '' ?>">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -111,7 +122,7 @@ if (isset($_POST['edit'])) {
                                             <input required name="email" type="email"
                                                 class="form-control"
                                                 placeholder="Masukkan email anda"
-                                                value="<?= $rowEdit['email'] ?>">
+                                                value="<?= isset($_GET['edit']) ? $rowEdit['email'] : '' ?>">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -119,8 +130,8 @@ if (isset($_POST['edit'])) {
                                             <label for="">Password *</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input required name="password" type="password"
-                                                class="form-control"
+                                            <input name="password" type="password"
+                                                class="form-control" value=""
                                                 placeholder="Masukkan password anda">
                                         </div>
                                     </div>

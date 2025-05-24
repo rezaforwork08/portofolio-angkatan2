@@ -4,7 +4,7 @@ include 'config/koneksi.php';
 // munculkan/pilih semua data dari table user urutkan dari yang terbesar
 // ke terkecil
 
-$query = mysqli_query($config, "SELECT * FROM users ORDER BY id DESC");
+$query = mysqli_query($config, "SELECT * FROM users WHERE deleted_at = 0 ORDER BY id DESC");
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 if (isset($_GET['delete'])) {
@@ -38,7 +38,7 @@ if (isset($_GET['delete'])) {
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div align="right" class="mb-3">
-                                        <a href="tambah-user.php" class="btn btn-primary">Tambah</a>
+                                        <a href="tambah-user.php?level=<?php echo base64_encode($_SESSION['LEVEL']) ?>" class="btn btn-primary">Tambah</a>
                                     </div>
                                     <table class="table table-bordered table-striped">
                                         <thead>
@@ -58,7 +58,7 @@ if (isset($_GET['delete'])) {
                                                     <td><?= $data['name'] ?></td>
                                                     <td><?= $data['email'] ?></td>
                                                     <td>
-                                                        <a href="tambah-user.php?edit=<?php echo $data['id'] ?>" class="btn btn-success btn-sm">Edit</a>
+                                                        <a href="tambah-user.php?edit=<?php echo $data['id'] ?>&level=<?php echo base64_encode($_SESSION['LEVEL']) ?>" class="btn btn-success btn-sm">Edit</a>
                                                         <a onclick="return confirm('Are you sure??')"
                                                             href="user.php?delete=<?php echo $data['id'] ?>" class="btn btn-warning btn-sm">Delete</a>
                                                     </td>

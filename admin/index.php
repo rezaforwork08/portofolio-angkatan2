@@ -1,7 +1,7 @@
 <?php
 session_start();
+session_regenerate_id();
 include 'config/koneksi.php';
-
 
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -15,8 +15,10 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     // apakah / jika betul email dan password yang di input user adalah email yg ada di table user
     if (mysqli_num_rows($query)  > 0) {
         $row = mysqli_fetch_assoc($query);
+
         $_SESSION['NAME'] = $row['name'];
         $_SESSION['ID_USER'] = $row['id'];
+        $_SESSION['LEVEL'] = $row['id_level'];
         header("location:dashboard.php");
     } else {
         header("location:index.php?error=login");
