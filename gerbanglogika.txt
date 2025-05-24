@@ -1,4 +1,0 @@
-T    &&  T   = TRUE
-T    &&  F   = FALSE
-F    &&  T   = FALSE
-F    &&  F   = FALSE
