@@ -11,6 +11,9 @@ if (isset($_POST['simpan'])) {
     $photo = $_FILES['photo']['name']; //reza.png
     $tmp_name = $_FILES['photo']['tmp_name'];
 
+    $fileName = uniqid() . "_" . basename($photo);
+    $filePath = "uploads/" . $fileName;
+
     // mencari apakah di dalem table profiles ada datanya, jika ada maka update, jika tidak ada maka insert
     // mysqli_num_row()
     $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY id DESC");
@@ -20,9 +23,7 @@ if (isset($_POST['simpan'])) {
 
         // jika user upload gambar
         if (!empty($photo)) {
-            $fileName = uniqid() . "_" . basename($photo);
-            $filePath = "uploads/" . $fileName;
-            
+
             unlink("uploads/" . $rowProfile['photo']);
             move_uploaded_file($tmp_name, $filePath);
 
@@ -38,7 +39,12 @@ if (isset($_POST['simpan'])) {
     } else {
         // perintah insert
         if (!empty($photo)) {
+            move_uploaded_file($tmp_name, $filePath);
+
             // JIKA USER UPLOAD GAMBAR
+            $insertQ = mysqli_query($config, "INSERT INTO profiles (profile_name,  description, photo) 
+            VALUES ('$profile_name', '$description','$fileName')");
+            header("location:?page=manage-profile&tambah=berhasil");
         } else {
             // JIKA USER TIDAK MENGUPLOAD GAMBAR
             $insertQ = mysqli_query($config, "INSERT INTO profiles (profile_name,  description) 

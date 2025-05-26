@@ -4,12 +4,25 @@ include 'admin/config/koneksi.php';
 // query profiles
 $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY id DESC");
 $rowProfile   = mysqli_fetch_assoc($queryProfile);
+
+
+if (isset($_POST['save'])) {
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    $insert = mysqli_query($config, "INSERT INTO contacts (first_name, last_name, email, subject, message)
+     VALUES('$first_name','$last_name','$email','$subject','$message')");
+    header("location:index.php?contact=berhasil");
+}
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Nitro &mdash; Website Template by Colorlib</title>
+    <title>Reza Ibrahim</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -910,18 +923,18 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
 
 
-                        <form action="#" class="p-5 bg-white">
+                        <form action="#" class="p-5 bg-white" method="post">
 
                             <h2 class="h4 text-black mb-5">Contact Form</h2>
 
                             <div class="row form-group">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label class="text-black" for="fname">First Name</label>
-                                    <input type="text" id="fname" class="form-control">
+                                    <input type="text" id="fname" class="form-control" name="first_name">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-black" for="lname">Last Name</label>
-                                    <input type="text" id="lname" class="form-control">
+                                    <input type="text" id="lname" class="form-control" name="last_name">
                                 </div>
                             </div>
 
@@ -929,7 +942,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
                                 <div class="col-md-12">
                                     <label class="text-black" for="email">Email</label>
-                                    <input type="email" id="email" class="form-control">
+                                    <input type="email" id="email" class="form-control" name="email">
                                 </div>
                             </div>
 
@@ -937,7 +950,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
                                 <div class="col-md-12">
                                     <label class="text-black" for="subject">Subject</label>
-                                    <input type="subject" id="subject" class="form-control">
+                                    <input type="subject" id="subject" class="form-control" name="subject">
                                 </div>
                             </div>
 
@@ -950,7 +963,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
                             <div class="row form-group">
                                 <div class="col-md-12">
-                                    <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                                    <input type="submit" name="save" value="Send Message" class="btn btn-primary btn-md text-white">
                                 </div>
                             </div>
 
