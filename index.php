@@ -15,7 +15,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="depan/fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="depan/css/bootstrap.min.css">
     <link rel="stylesheet" href="depan/css/jquery-ui.css">
@@ -23,7 +23,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
     <link rel="stylesheet" href="depan/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="depan/css/owl.theme.default.min.css">
 
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="depan/css/jquery.fancybox.min.css">
 
     <link rel="stylesheet" href="depan/css/bootstrap-datepicker.css">
 
@@ -143,7 +143,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
                 <div class="row">
                     <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
                         <figure class="circle-bg">
-                            <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
+                            <img src="admin/uploads/<?php echo isset($rowProfile['photo']) ? $rowProfile['photo'] : '' ?>" alt="Image" class="img-fluid">
                         </figure>
                     </div>
                     <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
@@ -151,13 +151,11 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
                             <h3 class="h3 mb-4 text-black">
                                 <?php echo isset($rowProfile['profile_name']) ? $rowProfile['profile_name'] : '' ?>
                             </h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo tempora cumque eligendi in nostrum labore omnis quaerat.</p>
+
+                            <?php echo isset($rowProfile['description']) ? $rowProfile['description'] : '' ?>
 
                         </div>
-
-
-
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <ul class="list-unstyled ul-check success">
                                 <li>Officia quaerat eaque neque</li>
                                 <li>Possimus aut consequuntur incidunt</li>
@@ -165,7 +163,7 @@ $rowProfile   = mysqli_fetch_assoc($queryProfile);
                                 <li>Consectetur adipisicing elit</li>
                             </ul>
 
-                        </div>
+                        </div> -->
 
 
 

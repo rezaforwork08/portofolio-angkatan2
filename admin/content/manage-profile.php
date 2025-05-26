@@ -5,7 +5,11 @@ if (isset($_POST['simpan'])) {
     $profile_name = $_POST['profile_name']; //undifened array key profile_name
     $description = $_POST['description'];
     //PROSES SIMPAN FOTO
-    $photo = $_FILES['photo']['name'];
+    // echo "<pre>";
+    // print_r($_FILES['photo']['name']);
+    // die;
+    $photo = $_FILES['photo']['name']; //reza.png
+    $tmp_name = $_FILES['photo']['tmp_name'];
 
     // mencari apakah di dalem table profiles ada datanya, jika ada maka update, jika tidak ada maka insert
     // mysqli_num_row()
@@ -13,10 +17,24 @@ if (isset($_POST['simpan'])) {
     if (mysqli_num_rows($queryProfile) > 0) {
         $rowProfile = mysqli_fetch_assoc($queryProfile);
         $id = $rowProfile['id'];
-        // perintah update
-        $update = mysqli_query($config, "UPDATE profiles SET 
-        profile_name='$profile_name',  description='$description' WHERE id ='$id'");
-        header("location:?page=manage-profile&ubah=berhasil");
+
+        // jika user upload gambar
+        if (!empty($photo)) {
+            $fileName = uniqid() . "_" . basename($photo);
+            $filePath = "uploads/" . $fileName;
+            
+            unlink("uploads/" . $rowProfile['photo']);
+            move_uploaded_file($tmp_name, $filePath);
+
+            $update = mysqli_query($config, "UPDATE profiles SET 
+            profile_name='$profile_name',  description='$description', photo='$fileName' WHERE id ='$id'");
+            header("location:?page=manage-profile&ubah=berhasil");
+        } else {
+            // perintah update
+            $update = mysqli_query($config, "UPDATE profiles SET 
+            profile_name='$profile_name',  description='$description' WHERE id ='$id'");
+            header("location:?page=manage-profile&ubah=berhasil");
+        }
     } else {
         // perintah insert
         if (!empty($photo)) {
@@ -64,7 +82,7 @@ if (isset($_GET['del'])) {
         </div>
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" name="description" cols="30" rows="5"><?php echo !isset($row['description']) ? "" : $row['description'] ?></textarea>
+            <textarea id="summernote" class="form-control" name="description" cols="30" rows="5"><?php echo !isset($row['description']) ? "" : $row['description'] ?></textarea>
         </div>
         <div class="mb-3">
             <label class="form-label">Photo</label>
