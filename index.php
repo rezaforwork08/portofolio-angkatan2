@@ -5,6 +5,16 @@ include 'admin/config/koneksi.php';
 $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY id DESC");
 $rowProfile   = mysqli_fetch_assoc($queryProfile);
 
+$queryTeams = mysqli_query($config, "SELECT * FROM teams ORDER BY id DESC");
+$rowTeams   = mysqli_fetch_all($queryTeams, MYSQLI_ASSOC);
+
+$queryCategories = mysqli_query($config, "SELECT * FROM categories ORDER BY id DESC");
+$rowCategories   = mysqli_fetch_all($queryCategories, MYSQLI_ASSOC);
+
+$queryPorto = mysqli_query($config, "SELECT * FROM portofolios ORDER BY id DESC");
+$rowPorto  = mysqli_fetch_all($queryPorto, MYSQLI_ASSOC);
+
+
 
 if (isset($_POST['save'])) {
     $first_name = $_POST['first_name'];
@@ -45,6 +55,7 @@ if (isset($_POST['save'])) {
     <link rel="stylesheet" href="depan/css/aos.css">
 
     <link rel="stylesheet" href="depan/css/style.css">
+
 
 </head>
 
@@ -259,150 +270,28 @@ if (isset($_POST['save'])) {
                 </div>
                 <div class="row">
 
-
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_5.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Kaiara Spencer</h3>
-                                <span class="position">Product Manager</span>
+                    <?php foreach ($rowTeams as $team): ?>
+                        <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="">
+                            <div class="team-member">
+                                <figure>
+                                    <ul class="social">
+                                        <li><a href="#"><span class="icon-facebook"></span></a></li>
+                                        <li><a href="#"><span class="icon-twitter"></span></a></li>
+                                        <li><a href="#"><span class="icon-linkedin"></span></a></li>
+                                        <li><a href="#"><span class="icon-instagram"></span></a></li>
+                                    </ul>
+                                    <img src="images/person_5.jpg" alt="Image" class="img-fluid">
+                                </figure>
+                                <div class="p-3">
+                                    <h3><?php echo $team['name'] ?></h3>
+                                    <span class="position"><?php echo $team['position_name'] ?></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_6.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Dave Simpson</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach ?>
 
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_7.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Ben Thompson</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_8.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Kyla Stewart</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_1.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Kaiara Spencer</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_2.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Dave Simpson</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_3.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Ben Thompson</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="team-member">
-                            <figure>
-                                <ul class="social">
-                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                                <img src="images/person_4.jpg" alt="Image" class="img-fluid">
-                            </figure>
-                            <div class="p-3">
-                                <h3>Chris Stewart</h3>
-                                <span class="position">Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
 
 
 
@@ -424,104 +313,24 @@ if (isset($_POST['save'])) {
                 <div class="row justify-content-center mb-5" data-aos="fade-up">
                     <div id="filters" class="filters text-center button-group col-md-7">
                         <button class="btn btn-primary active" data-filter="*">All</button>
-                        <button class="btn btn-primary" data-filter=".web">Web</button>
-                        <button class="btn btn-primary" data-filter=".design">Design</button>
-                        <button class="btn btn-primary" data-filter=".brand">Brand</button>
+                        <?php foreach ($rowCategories as $category): ?>
+                            <button class="btn btn-primary" data-filter=".<?php echo $category['id'] ?>"><?php echo $category['name'] ?></button>
+                        <?php endforeach ?>
                     </div>
                 </div>
 
                 <div id="posts" class="row no-gutter">
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_1.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
+                    <?php foreach ($rowPorto as $key => $porto): ?>
+                        <div class="item <?php echo $porto['id_category'] ?> col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+                            <?php echo $porto['name_porto']; ?>
+                            <!-- <a href="images/img_1.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
                             <span class="icon-search2"></span>
                             <img class="img-fluid" src="images/img_1.jpg">
-                        </a>
-                    </div>
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_2.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_2.jpg">
-                        </a>
-                    </div>
+                            
+                        </a> -->
+                        </div>
+                    <?php endforeach ?>
 
-                    <div class="item brand col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_3.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_3.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-
-                        <a href="images/img_4.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_4.jpg">
-                        </a>
-
-                    </div>
-
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_5.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_5.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item brand col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_6.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_6.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_7.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_7.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_8.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_8.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_9.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_9.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_10.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_10.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item brand col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_11.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_11.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_12.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_12.jpg">
-                        </a>
-                    </div>
-
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
-                        <a href="images/img_13.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
-                            <span class="icon-search2"></span>
-                            <img class="img-fluid" src="images/img_13.jpg">
-                        </a>
-                    </div>
 
                 </div>
             </div>

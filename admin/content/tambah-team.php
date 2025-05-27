@@ -2,6 +2,13 @@
 // jika user/pengguna mencet tombol simpan
 // ambil data dari inputan, email, nama dan password
 // masukkan ke dalam table user (name, email, password) nilainya dari masing-masing inputan 
+if ($_SESSION['LEVEL'] != 1) {
+    // echo "<h1>Anda tidak berhak kesini !!</h1>";
+    // echo "<a href='dashboard.php' class='btn btn-warning'>Kembali</a>";
+    // die;
+    header("location:dashboard.php?failed=access");
+}
+
 if (isset($_POST['simpan'])) {
     $name = $_POST['name'];
     $position_name = $_POST['position_name'];

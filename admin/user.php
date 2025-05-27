@@ -1,6 +1,7 @@
 <?php
 include 'config/koneksi.php';
 
+
 // munculkan/pilih semua data dari table user urutkan dari yang terbesar
 // ke terkecil
 
