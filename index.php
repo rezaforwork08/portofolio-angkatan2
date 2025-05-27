@@ -321,7 +321,7 @@ if (isset($_POST['save'])) {
 
                 <div id="posts" class="row no-gutter">
                     <?php foreach ($rowPorto as $key => $porto): ?>
-                        <div class="item <?php echo $porto['id_category'] ?> col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+                        <div class="item <?php echo $portco['id_category'] ?> col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
                             <?php echo $porto['name_porto']; ?>
                             <!-- <a href="images/img_1.jpg" class="item-wrap fancybox" data-fancybox="gallery2">
                             <span class="icon-search2"></span>

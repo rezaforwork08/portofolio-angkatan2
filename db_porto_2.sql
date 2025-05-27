@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Bulan Mei 2025 pada 09.41
+-- Waktu pembuatan: 27 Bulan Mei 2025 pada 10.19
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_porto_2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Web'),
+(2, 'Desain');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `subject` varchar(100) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -43,6 +79,28 @@ INSERT INTO `levels` (`id`, `name_level`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `portofolios`
+--
+
+CREATE TABLE `portofolios` (
+  `id` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `name_porto` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `portofolios`
+--
+
+INSERT INTO `portofolios` (`id`, `id_category`, `name_porto`) VALUES
+(1, 1, 'UI/UX Pertanian'),
+(2, 1, 'Website Compro'),
+(3, 2, 'Kartu Nama'),
+(4, 2, 'MUG');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `profiles`
 --
 
@@ -58,7 +116,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `profile_name`, `description`, `photo`) VALUES
-(55, 'Reza', 'Lorem123', NULL);
+(56, 'Sejarah Singkat 123', '<p>Arya sempat beberapa kali mencari manajer pengganti untuk Reza Rahadian. Namun, setelah lama kelamaan, Arya akhirnya mengisi pos kosong yang ditinggalkan.</p><p>tess</p>', '6833db2ad1f0d_bakrie.jfif');
 
 -- --------------------------------------------------------
 
@@ -103,8 +161,8 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `position_name`, `photo`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'For the next great business', 'Lorem ipsum dolor sit amet consectetur adipisicing', 'logo golkar.png', 1, '2025-05-24 04:57:10', NULL),
-(2, 'For the next great business', 'Lorem ipsum dolor sit amet consectetur adipisicing', 'logo golkar.png', 1, '2025-05-24 04:57:25', NULL);
+(1, 'Reza', 'Programmer', 'logo golkar.png', 1, '2025-05-24 04:57:10', '2025-05-27 08:00:49'),
+(2, 'Arif', 'Data Analis', 'logo golkar.png', 1, '2025-05-24 04:57:25', '2025-05-27 08:01:16');
 
 -- --------------------------------------------------------
 
@@ -129,16 +187,34 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `id_level`, `name`, `email`, `password`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 'Reza123', 'admin@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-05-21 01:40:52', '2025-05-22 07:55:55', 0),
-(7, 2, 'Test', 'test@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-05-22 08:34:08', '2025-05-24 05:24:02', 0);
+(7, 2, 'Test', 'test@gmail.com', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '2025-05-22 08:34:08', '2025-05-27 04:38:24', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indeks untuk tabel `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `levels`
 --
 ALTER TABLE `levels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `portofolios`
+--
+ALTER TABLE `portofolios`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -171,16 +247,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `levels`
 --
 ALTER TABLE `levels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT untuk tabel `portofolios`
+--
+ALTER TABLE `portofolios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT untuk tabel `skills`
